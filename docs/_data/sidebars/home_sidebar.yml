@@ -11,7 +11,7 @@ entries:
       url: /
     - output: web,pdf
       title: Dependency Checker
-      url: checker.html
+      url: checker
     output: web
     title: dependency_checker
   output: web
