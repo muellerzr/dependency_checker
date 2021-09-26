@@ -62,5 +62,5 @@ sidebars:
 plugins:
     - jekyll-remote-theme
     
-remote_theme: fastai/nbdev-jekyll-theme
+remote_theme: muellerzr/nbdev-jekyll-theme
 baseurl: /dependency_checker/
