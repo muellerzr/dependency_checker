@@ -10,7 +10,7 @@
 ## How to use
 
 ```python
-from dependency_checker.checker import get_installed_dependencies, check_new_version
+from dependency_checker import get_installed_dependencies, check_new_version
 ```
 
 `dependency_checker` has two functionalities:
@@ -42,10 +42,3 @@ There also exists `check_new_version`, which will see if a package version is th
 ```python
 check_new_version('pipdeptree', '2.0.9')
 ```
-
-
-
-
-    True
-
-
