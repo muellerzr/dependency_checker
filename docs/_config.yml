@@ -1,6 +1,6 @@
-repository: muellerzr/dependency_verifier
+repository: muellerzr/dependency_checker
 output: web
-topnav_title: dependency_verifier
+topnav_title: Dependency Checker
 site_title: dependency_verifier
 company_name: Zachary Mueller
 description: A pythonic way to check if a package's dependencies are out of date
