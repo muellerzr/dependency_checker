@@ -5,7 +5,7 @@
 
 ## Install
 
-`pip install dependency_checker`
+`pip install dependency-checker`
 
 ## How to use
 
@@ -42,3 +42,10 @@ There also exists `check_new_version`, which will see if a package version is th
 ```python
 check_new_version('pipdeptree', '2.0.9')
 ```
+
+
+
+
+    True
+
+
