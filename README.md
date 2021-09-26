@@ -9,6 +9,10 @@
 
 ## How to use
 
+```python
+from dependency_checker.checker import get_installed_dependencies, check_new_version
+```
+
 `dependency_checker` has two functionalities:
 - Checking a python project's dependencies
 - Checking if a python package is on the latest version
