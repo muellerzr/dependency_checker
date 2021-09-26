@@ -2,8 +2,8 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"get_installed_dependencies": "00_dependency_checker.ipynb",
-         "check_new_version": "00_dependency_checker.ipynb"}
+index = {"get_installed_dependencies": "00_checker.ipynb",
+         "check_new_version": "00_checker.ipynb"}
 
 modules = ["checker.py"]
 
