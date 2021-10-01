@@ -11,7 +11,6 @@ jobs:
         architecture: 'x64'
     - name: Install the library
       run: |
-        pip install -U pip==21.2.4
         pip install nbdev jupyter nbverbose
         pip install -e .
     - name: Read all notebooks
