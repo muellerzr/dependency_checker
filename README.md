@@ -10,7 +10,7 @@
 ## How to use
 
 ```
-from dependency_checker import get_installed_dependencies, check_new_version
+from dependency_checker import get_installed_dependencies, is_latest_version
 ```
 
 `dependency_checker` has two functionalities:
@@ -28,6 +28,21 @@ get_installed_dependencies('dependency-checker', depth_limit=1)
 
 
 
+    {'packaging': '21.0', 'pip': '21.2.4', 'pipdeptree': '2.1.0'}
+
+
+
+Generally a depth of 1 is enough to get a package's main dependencies, bar `pip`, `packaging`, and other "standard" python resources.
+
+If we also want to include the original package, we can pass that in as a parameter:
+
+```
+get_installed_dependencies('dependency-checker', depth_limit=1, include_self=True)
+```
+
+
+
+
     {'dependency-checker': '0.0.1',
      'packaging': '21.0',
      'pip': '21.2.4',
@@ -35,17 +50,15 @@ get_installed_dependencies('dependency-checker', depth_limit=1)
 
 
 
-Generally a depth of 1 is enough to get a package's main dependencies, bar `pip`, `packaging`, and other "standard" python resources.
-
-There also exists `check_new_version`, which will see if a package version is the latest available on `pypi`:
+There also exists `is_latest_version`, which will see if a package version is the latest available on `pypi`:
 
 ```
-check_new_version('pipdeptree', '2.0.9')
+is_latest_version('pipdeptree', '2.0.9')
 ```
 
 
 
 
-    True
+    False
 
 

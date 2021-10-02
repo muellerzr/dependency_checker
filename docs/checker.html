@@ -54,7 +54,7 @@ nb_path: "00_checker.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_installed_dependencies" class="doc_header"><code>get_installed_dependencies</code><a href="https://github.com/muellerzr/dependency_checker/tree/master/dependency_checker/checker.py#L9" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_installed_dependencies</code>(<strong><code>package_name</code></strong>:<code>str</code>, <strong><code>depth_limit</code></strong>:<code>int</code>=<em><code>1</code></em>)</p>
+<h4 id="get_installed_dependencies" class="doc_header"><code>get_installed_dependencies</code><a href="https://github.com/muellerzr/dependency_checker/tree/master/dependency_checker/checker.py#L9" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_installed_dependencies</code>(<strong><code>package_name</code></strong>:<code>str</code>, <strong><code>depth_limit</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>include_self</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Recursively grabs dependencies of python package</p>
 <p><strong>Parameters:</strong></p>
@@ -63,6 +63,9 @@ nb_path: "00_checker.ipynb"
 </ul>
 <ul>
 <li><strong><code>depth_limit</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em>    <p>How deep to follow nested dependencies</p></li>
+</ul>
+<ul>
+<li><strong><code>include_self</code></strong> : <em><code>&lt;class 'bool'&gt;</code></em>, <em>optional</em>  <p>Whether to include the original library in the results</p></li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul>
@@ -89,7 +92,7 @@ nb_path: "00_checker.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This function operates by traversing a DAG and grabbing dependencies of projects found from it. Generally a depth of 1 is recommended, below is a quick guide to what will be returned at each depth.</p>
-<p><strong>0</strong>: A depth of zero will return just the project:</p>
+<p><strong>0</strong>: A depth of zero will an empty dictionary  unless <code>include_self</code> is <code>True</code>. If so, it will include only the library name:</p>
 
 </div>
 </div>
@@ -118,6 +121,40 @@ nb_path: "00_checker.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">deps</span> <span class="o">==</span> <span class="p">{}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deps</span> <span class="o">=</span> <span class="n">get_installed_dependencies</span><span class="p">(</span><span class="s1">&#39;pipdeptree&#39;</span><span class="p">,</span> <span class="n">depth_limit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">include_self</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">deps</span> <span class="o">==</span> <span class="p">{</span><span class="s1">&#39;pipdeptree&#39;</span><span class="p">:</span><span class="s1">&#39;2.1.0&#39;</span><span class="p">}</span>
 </pre></div>
 
@@ -130,7 +167,7 @@ nb_path: "00_checker.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>1</strong>: A depth of one will return the project and its main dependencies, such as those stated in the <code>requirements.txt</code> as well as packages such as <code>pip</code></p>
+<p><strong>1</strong>: A depth of one will return the project and its main dependencies (if <code>include_self</code> is <code>True</code>), such as those stated in the <code>requirements.txt</code> as well as packages such as <code>pip</code></p>
 
 </div>
 </div>
@@ -142,7 +179,7 @@ nb_path: "00_checker.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deps</span> <span class="o">=</span> <span class="n">get_installed_dependencies</span><span class="p">(</span><span class="s1">&#39;pipdeptree&#39;</span><span class="p">,</span> <span class="n">depth_limit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deps</span> <span class="o">=</span> <span class="n">get_installed_dependencies</span><span class="p">(</span><span class="s1">&#39;pipdeptree&#39;</span><span class="p">,</span> <span class="n">depth_limit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">include_self</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -159,7 +196,75 @@ nb_path: "00_checker.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">deps</span> <span class="o">==</span> <span class="p">{</span><span class="s1">&#39;pipdeptree&#39;</span><span class="p">:</span><span class="s1">&#39;2.1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;pip&#39;</span><span class="p">:</span><span class="s1">&#39;21.2.4&#39;</span><span class="p">}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">deps</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">package</span> <span class="ow">in</span> <span class="n">deps</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">for</span> <span class="n">package</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;pipdeptree&#39;</span><span class="p">,</span> <span class="s1">&#39;pip&#39;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deps</span> <span class="o">=</span> <span class="n">get_installed_dependencies</span><span class="p">(</span><span class="s1">&#39;pipdeptree&#39;</span><span class="p">,</span> <span class="n">depth_limit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">include_self</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">deps</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="s1">&#39;pip&#39;</span> <span class="ow">in</span> <span class="n">deps</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -178,7 +283,7 @@ nb_path: "00_checker.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Checking-for-New-Versions">Checking for New Versions<a class="anchor-link" href="#Checking-for-New-Versions"> </a></h2><p>Given these dependencies, we can also then check for a new version to see if an upgrade is available. This is what the <a href="/dependency_checker/dependency_checker.html#check_new_version"><code>check_new_version</code></a> function is designed for:</p>
+<h2 id="Checking-for-New-Versions">Checking for New Versions<a class="anchor-link" href="#Checking-for-New-Versions"> </a></h2><p>Given these dependencies, we can also then check for a new version to see if an upgrade is available. This is what the <a href="/dependency_checker/checker.html#is_latest_version"><code>is_latest_version</code></a> function is designed for:</p>
 
 </div>
 </div>
@@ -194,7 +299,7 @@ nb_path: "00_checker.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="check_new_version" class="doc_header"><code>check_new_version</code><a href="https://github.com/muellerzr/dependency_checker/tree/master/dependency_checker/checker.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_new_version</code>(<strong><code>package_name</code></strong>:<code>str</code>, <strong><code>current_version</code></strong>:<code>str</code>)</p>
+<h4 id="is_latest_version" class="doc_header"><code>is_latest_version</code><a href="https://github.com/muellerzr/dependency_checker/tree/master/dependency_checker/checker.py#L37" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>is_latest_version</code>(<strong><code>package_name</code></strong>:<code>str</code>, <strong><code>current_version</code></strong>:<code>str</code>)</p>
 </blockquote>
 <p>Compares the current version with the latest version, and returns if they are different</p>
 <p><strong>Parameters:</strong></p>
@@ -233,8 +338,8 @@ nb_path: "00_checker.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">has_new_version</span> <span class="o">=</span> <span class="n">check_new_version</span><span class="p">(</span><span class="s1">&#39;pipdeptree&#39;</span><span class="p">,</span> <span class="s1">&#39;2.0.9&#39;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">has_new_version</span> <span class="o">==</span> <span class="kc">True</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">using_latest_version</span> <span class="o">=</span> <span class="n">is_latest_version</span><span class="p">(</span><span class="s1">&#39;pipdeptree&#39;</span><span class="p">,</span> <span class="s1">&#39;2.0.9&#39;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">using_latest_version</span> <span class="o">==</span> <span class="kc">False</span>
 </pre></div>
 
     </div>
@@ -246,7 +351,7 @@ nb_path: "00_checker.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Here we tested if <code>pipdeptree</code> has a new version available. The version we specified is one less than that of the latest release at the time of development. We got <code>True</code>, meaning a newer version is available.</p>
+<p>Here we tested if <code>pipdeptree</code> is the latest version. The version we specified is one less than that of the latest release at the time of development. We got <code>False</code>, meaning a newer version is available.</p>
 
 </div>
 </div>
