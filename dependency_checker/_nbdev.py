@@ -3,9 +3,12 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"get_installed_dependencies": "00_checker.ipynb",
-         "is_latest_version": "00_checker.ipynb"}
+         "is_latest_version": "00_checker.ipynb",
+         "extract_project_dependencies": "01_pipreqs.ipynb",
+         "generate_requirements_file": "01_pipreqs.ipynb"}
 
-modules = ["checker.py"]
+modules = ["checker.py",
+           "pipreqs.py"]
 
 doc_url = "https://muellerzr.github.io/dependency_checker/"
 

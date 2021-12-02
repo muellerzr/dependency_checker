@@ -1,6 +1,7 @@
 {
   "dependency_checker": {
     "Overview": "/",
-    "Dependency Checker": "checker.html"
+    "Dependency Checker": "checker.html",
+    "Codebase Requirement Extraction": "pipreqs.html"
   }
 }
