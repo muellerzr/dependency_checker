@@ -104,14 +104,17 @@ def check_for_newer_release(
         version = parse(importlib_metadata.version(package))
     if not is_latest_version(package, str(version)):
         notes = get_latest_release_notes(package)
-        s = f"Newer version of `{package}` was found available on pypi ({str(version)} -> {notes['release_tag']})\n\n"
-        s += f"To upgrade run `pip install {package} -U`\n\n"
-        if _in_notebook():
-            from IPython.display import display, Markdown
-            s += f"[Click Here]({notes['notes_url']}) to see the latest release notes."
-            display(Markdown(s))
+        if notes != {}
+            s = f"Newer version of `{package}` was found available on pypi ({str(version)} -> {notes['release_tag']})\n\n"
+            s += f"To upgrade run `pip install {package} -U`\n\n"
+            if _in_notebook():
+                from IPython.display import display, Markdown
+                s += f"[Click Here]({notes['notes_url']}) to see the latest release notes."
+                display(Markdown(s))
+            else:
+                s += f"To read the latest release notes go to: {notes['notes_url']}"
+                print(s)
+                return True
         else:
-            s += f"To read the latest release notes go to: {notes['notes_url']}"
-            print(s)
-            return True
+            return False
     return False
