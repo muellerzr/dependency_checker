@@ -32,8 +32,8 @@ nb_path: "01_pipreqs.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/mnt/d/jupyter/anaconda3/envs/nbagile/lib/python3.7/site-packages/fastprogress/fastprogress.py:102: UserWarning: Couldn&#39;t import ipywidgets properly, progress bar will use console behavior
-  warn(&#34;Couldn&#39;t import ipywidgets properly, progress bar will use console behavior&#34;)
+<pre>/opt/conda/lib/python3.9/site-packages/_distutils_hack/__init__.py:30: UserWarning: Setuptools is replacing distutils.
+  warnings.warn(&#34;Setuptools is replacing distutils.&#34;)
 </pre>
 </div>
 </div>
@@ -167,26 +167,44 @@ nb_path: "01_pipreqs.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="extract_project_dependencies" class="doc_header"><code>extract_project_dependencies</code><a href="https://github.com/muellerzr/dependency_checker/tree/master/dependency_checker/pipreqs.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>extract_project_dependencies</code>(<strong><code>folder_name</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>depth_limit</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>ignore_dependencies</code></strong>:<code>Union</code>[<code>str</code>, <code>List</code>[<code>str</code>]]=<em><code>[]</code></em>, <strong><code>ignore_libraries</code></strong>:<code>Union</code>[<code>str</code>, <code>List</code>[<code>str</code>]]=<em><code>[]</code></em>)</p>
+<h4 id="extract_project_dependencies" class="doc_header"><code>extract_project_dependencies</code><a href="https://github.com/muellerzr/dependency_checker/tree/master/dependency_checker/pipreqs.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>extract_project_dependencies</code>(<strong><code>folder_name</code></strong>:<code>Union</code>[<code>str</code>, <code>Path</code>], <strong><code>depth_limit</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>ignore_dependencies</code></strong>:<code>Union</code>[<code>str</code>, <code>typing.List[str]</code>]=<em><code>[]</code></em>, <strong><code>ignore_libraries</code></strong>:<code>Union</code>[<code>str</code>, <code>typing.List[str]</code>]=<em><code>[]</code></em>)</p>
 </blockquote>
 <p>Looks at a project folder, and pulls out all dependencies utilized in it</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><strong><code>folder_name</code></strong> : <em><code>typing.Union[str, pathlib.Path]</code></em>  <p>Name of a folder containing the source code for a python project</p></li>
-</ul>
-<ul>
-<li><strong><code>depth_limit</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em>    <p>The maximum recursive depth, when following a dependency's tree</p></li>
-</ul>
-<ul>
-<li><strong><code>ignore_dependencies</code></strong> : <em><code>typing.Union[str, typing.List[str]]</code></em>, <em>optional</em>  <p>Libraries who's dependency versions we ignore and instead use the library version</p></li>
-</ul>
-<ul>
-<li><strong><code>ignore_libraries</code></strong> : <em><code>typing.Union[str, typing.List[str]]</code></em>, <em>optional</em> <p>List of explicit library names that we remove from the final version dictionary</p></li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<ul>
-<li><em><code>&lt;class 'dict'&gt;</code></em>   <p>A dictionary of `{package:version}` for a project</p></li>
-</ul>
+<table>
+<thead><tr>
+<th></th>
+<th>Type</th>
+<th>Default</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>folder_name</code></strong></td>
+<td><code>typing.Union[str, pathlib.Path]</code></td>
+<td></td>
+<td>Name of a folder containing the source code for a python project</td>
+</tr>
+<tr>
+<td><strong><code>depth_limit</code></strong></td>
+<td><code>int</code></td>
+<td><code>1</code></td>
+<td>The maximum recursive depth, when following a dependency's tree</td>
+</tr>
+<tr>
+<td><strong><code>ignore_dependencies</code></strong></td>
+<td><code>typing.Union[str, typing.List[str]]</code></td>
+<td><code>None</code></td>
+<td>Libraries who's dependency versions we ignore and instead use the library version</td>
+</tr>
+<tr>
+<td><strong><code>ignore_libraries</code></strong></td>
+<td><code>typing.Union[str, typing.List[str]]</code></td>
+<td><code>None</code></td>
+<td>List of explicit library names that we remove from the final version dictionary</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 
@@ -219,23 +237,6 @@ nb_path: "01_pipreqs.ipynb"
 <h4 id="generate_requirements_file" class="doc_header"><code>generate_requirements_file</code><a href="https://github.com/muellerzr/dependency_checker/tree/master/dependency_checker/pipreqs.py#L45" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>generate_requirements_file</code>(<strong><code>folder_name</code></strong>:"Name of a folder containing source code for a python project", <strong><code>depth_limit</code></strong>:"The maximum recursive depth, when following a dependency's tree"=<em><code>1</code></em>, <strong><code>ignore_dependencies</code></strong>:"Libraries who's dependency versions we ignore and instead use the library version"=<em><code>[]</code></em>, <strong><code>ignore_libraries</code></strong>:"List of explicit library names that we remove from the final version dictionary"=<em><code>[]</code></em>, <strong><code>requirements_file_name</code></strong>:"Name of requirements file"=<em><code>'requirements.txt'</code></em>, <strong><code>new_requirements_path</code></strong>:"Relative location to store requirements file"=<em><code>'.'</code></em>, <strong><code>override_existing_requirements</code></strong>:"Whether to override the requirements file (0/1)"=<em><code>0</code></em>)</p>
 </blockquote>
 <p>Builds a requirements.txt file from a project folder to a directory</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><p><strong><code>folder_name</code></strong> : <em><code>str &lt;Name of a folder containing source code for a python project&gt;</code></em></p>
-</li>
-<li><p><strong><code>depth_limit</code></strong> : <em><code>int &lt;The maximum recursive depth, when following a dependency's tree&gt;</code></em>, <em>optional</em></p>
-</li>
-<li><p><strong><code>ignore_dependencies</code></strong> : <em><code>str &lt;Libraries who's dependency versions we ignore and instead use the library version&gt;</code></em>, <em>optional</em></p>
-</li>
-<li><p><strong><code>ignore_libraries</code></strong> : <em><code>str &lt;List of explicit library names that we remove from the final version dictionary&gt;</code></em>, <em>optional</em></p>
-</li>
-<li><p><strong><code>requirements_file_name</code></strong> : <em><code>str &lt;Name of requirements file&gt;</code></em>, <em>optional</em></p>
-</li>
-<li><p><strong><code>new_requirements_path</code></strong> : <em><code>str &lt;Relative location to store requirements file&gt;</code></em>, <em>optional</em></p>
-</li>
-<li><p><strong><code>override_existing_requirements</code></strong> : <em><code>int &lt;Whether to override the requirements file (0/1)&gt;</code></em>, <em>optional</em></p>
-</li>
-</ul>
 
 </div>
 

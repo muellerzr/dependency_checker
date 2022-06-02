@@ -32,8 +32,8 @@ nb_path: "00_checker.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/mnt/d/jupyter/anaconda3/envs/nbagile/lib/python3.7/site-packages/fastprogress/fastprogress.py:102: UserWarning: Couldn&#39;t import ipywidgets properly, progress bar will use console behavior
-  warn(&#34;Couldn&#39;t import ipywidgets properly, progress bar will use console behavior&#34;)
+<pre>/opt/conda/lib/python3.9/site-packages/_distutils_hack/__init__.py:30: UserWarning: Setuptools is replacing distutils.
+  warnings.warn(&#34;Setuptools is replacing distutils.&#34;)
 </pre>
 </div>
 </div>
@@ -69,23 +69,38 @@ nb_path: "00_checker.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_installed_dependencies" class="doc_header"><code>get_installed_dependencies</code><a href="https://github.com/muellerzr/dependency_checker/tree/master/dependency_checker/checker.py#L9" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_installed_dependencies</code>(<strong><code>package_name</code></strong>:<code>str</code>, <strong><code>depth_limit</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>include_self</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+<h4 id="get_installed_dependencies" class="doc_header"><code>get_installed_dependencies</code><a href="https://github.com/muellerzr/dependency_checker/tree/master/dependency_checker/checker.py#L19" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_installed_dependencies</code>(<strong><code>package_name</code></strong>:<code>str</code>, <strong><code>depth_limit</code></strong>:<code>int</code>=<em><code>1</code></em>, <strong><code>include_self</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Recursively grabs dependencies of python package</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><strong><code>package_name</code></strong> : <em><code>&lt;class 'str'&gt;</code></em>   <p>The name of a python package</p></li>
-</ul>
-<ul>
-<li><strong><code>depth_limit</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em>    <p>How deep to follow nested dependencies</p></li>
-</ul>
-<ul>
-<li><strong><code>include_self</code></strong> : <em><code>&lt;class 'bool'&gt;</code></em>, <em>optional</em>  <p>Whether to include the original library in the results</p></li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<ul>
-<li><em><code>&lt;class 'dict'&gt;</code></em>   <p>A dictionary of {package:version}</p></li>
-</ul>
+<table>
+<thead><tr>
+<th></th>
+<th>Type</th>
+<th>Default</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>package_name</code></strong></td>
+<td><code>str</code></td>
+<td></td>
+<td>The name of a python package</td>
+</tr>
+<tr>
+<td><strong><code>depth_limit</code></strong></td>
+<td><code>int</code></td>
+<td><code>1</code></td>
+<td>How deep to follow nested dependencies</td>
+</tr>
+<tr>
+<td><strong><code>include_self</code></strong></td>
+<td><code>bool</code></td>
+<td><code>False</code></td>
+<td>Whether to include the original library in the results</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 
@@ -170,7 +185,7 @@ nb_path: "00_checker.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">deps</span> <span class="o">==</span> <span class="p">{</span><span class="s1">&#39;pipdeptree&#39;</span><span class="p">:</span><span class="s1">&#39;2.1.0&#39;</span><span class="p">}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">deps</span> <span class="o">==</span> <span class="p">{</span><span class="s1">&#39;pipdeptree&#39;</span><span class="p">:</span><span class="s1">&#39;2.2.1&#39;</span><span class="p">}</span>
 </pre></div>
 
     </div>
@@ -314,20 +329,32 @@ nb_path: "00_checker.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="is_latest_version" class="doc_header"><code>is_latest_version</code><a href="https://github.com/muellerzr/dependency_checker/tree/master/dependency_checker/checker.py#L37" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>is_latest_version</code>(<strong><code>package_name</code></strong>:<code>str</code>, <strong><code>current_version</code></strong>:<code>str</code>)</p>
+<h4 id="is_latest_version" class="doc_header"><code>is_latest_version</code><a href="https://github.com/muellerzr/dependency_checker/tree/master/dependency_checker/checker.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>is_latest_version</code>(<strong><code>package_name</code></strong>:<code>str</code>, <strong><code>current_version</code></strong>:<code>str</code>)</p>
 </blockquote>
 <p>Compares the current version with the latest version, and returns if they are different</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><strong><code>package_name</code></strong> : <em><code>&lt;class 'str'&gt;</code></em>   <p>The name of a pip python package</p></li>
-</ul>
-<ul>
-<li><strong><code>current_version</code></strong> : <em><code>&lt;class 'str'&gt;</code></em>    <p>The installed version of a package, such as "1.2.3"</p></li>
-</ul>
-<p><strong>Returns</strong>:</p>
-<ul>
-<li><em><code>&lt;class 'bool'&gt;</code></em>   <p>Whether the versions are the same</p></li>
-</ul>
+<table>
+<thead><tr>
+<th></th>
+<th>Type</th>
+<th>Default</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>package_name</code></strong></td>
+<td><code>str</code></td>
+<td></td>
+<td>The name of a pip python package</td>
+</tr>
+<tr>
+<td><strong><code>current_version</code></strong></td>
+<td><code>str</code></td>
+<td></td>
+<td>The installed version of a package, such as "1.2.3"</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 
@@ -371,6 +398,279 @@ nb_path: "00_checker.ipynb"
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Checking-the-Release-Notes">Checking the Release Notes<a class="anchor-link" href="#Checking-the-Release-Notes"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_github_repo_from_pypi" class="doc_header"><code>get_github_repo_from_pypi</code><a href="https://github.com/muellerzr/dependency_checker/tree/master/dependency_checker/checker.py#L63" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_github_repo_from_pypi</code>(<strong><code>name</code></strong>:<code>str</code>)</p>
+</blockquote>
+<p>Gets the Github URL for a pypi package</p>
+<table>
+<thead><tr>
+<th></th>
+<th>Type</th>
+<th>Default</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>name</code></strong></td>
+<td><code>str</code></td>
+<td></td>
+<td>The name of a pypi package</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">get_github_repo_from_pypi</span><span class="p">(</span><span class="s2">&quot;dependency_checker&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;muellerzr/dependency_checker&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_latest_release_notes" class="doc_header"><code>get_latest_release_notes</code><a href="https://github.com/muellerzr/dependency_checker/tree/master/dependency_checker/checker.py#L76" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_latest_release_notes</code>(<strong><code>package</code></strong>:<code>str</code>)</p>
+</blockquote>
+<p>Gets the URL for the latest release notes of a pypi package from Github if available</p>
+<table>
+<thead><tr>
+<th></th>
+<th>Type</th>
+<th>Default</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>package</code></strong></td>
+<td><code>str</code></td>
+<td></td>
+<td>The name of a pypi package</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">get_latest_release_notes</span><span class="p">(</span><span class="s2">&quot;dependency_checker&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="p">{}</span>
+<span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">get_latest_release_notes</span><span class="p">(</span><span class="s2">&quot;torch&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;notes_url&quot;</span><span class="p">,</span> <span class="s2">&quot;release_tag&quot;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">_in_notebook</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">shell</span> <span class="o">=</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">if</span> <span class="n">shell</span> <span class="o">==</span> <span class="s1">&#39;ZMQInteractiveShell&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>   <span class="c1"># Jupyter notebook or qtconsole</span>
+        <span class="k">elif</span> <span class="n">shell</span> <span class="o">==</span> <span class="s1">&#39;TerminalInteractiveShell&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># Terminal running IPython</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># Other type (?)</span>
+    <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>      <span class="c1"># Probably standard Python interpreter</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="check_for_newer_release" class="doc_header"><code>check_for_newer_release</code><a href="https://github.com/muellerzr/dependency_checker/tree/master/dependency_checker/checker.py#L96" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>check_for_newer_release</code>(<strong><code>package</code></strong>:<code>str</code>, <strong><code>version</code></strong>:<code>str</code>=<em><code>None</code></em>)</p>
+</blockquote>
+<p>Checks if a newer release is available and then finds the release notes</p>
+<table>
+<thead><tr>
+<th></th>
+<th>Type</th>
+<th>Default</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>package</code></strong></td>
+<td><code>str</code></td>
+<td></td>
+<td>The name of a pypi package</td>
+</tr>
+<tr>
+<td><strong><code>version</code></strong></td>
+<td><code>str</code></td>
+<td><code>None</code></td>
+<td>An optional version number</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With this utility we can quickly get a pretty formatted print of the new version to install, how to install it, and the latest release notes as a link:</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">check_for_newer_release</span><span class="p">(</span><span class="s2">&quot;torch&quot;</span><span class="p">,</span> <span class="s2">&quot;1.9.0&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<p>Newer version of <code>torch</code> was found available on pypi (1.9.0 -&gt; v1.11.0)</p>
+<p>To upgrade run <code>pip install torch -U</code></p>
+<p><a href="https://github.com/pytorch/pytorch/releases/tag/v1.11.0">Click Here</a> to see the latest release notes.</p>
+
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>False</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 </div>
  
 

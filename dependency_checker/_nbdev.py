@@ -4,6 +4,9 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"get_installed_dependencies": "00_checker.ipynb",
          "is_latest_version": "00_checker.ipynb",
+         "get_github_repo_from_pypi": "00_checker.ipynb",
+         "get_latest_release_notes": "00_checker.ipynb",
+         "check_for_newer_release": "00_checker.ipynb",
          "extract_project_dependencies": "01_pipreqs.ipynb",
          "generate_requirements_file": "01_pipreqs.ipynb"}
 
