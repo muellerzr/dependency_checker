@@ -104,7 +104,7 @@ def check_for_newer_release(
         version = parse(importlib_metadata.version(package))
     if not is_latest_version(package, str(version)):
         notes = get_latest_release_notes(package)
-        if notes != {}
+        if notes != {}:
             s = f"Newer version of `{package}` was found available on pypi ({str(version)} -> {notes['release_tag']})\n\n"
             s += f"To upgrade run `pip install {package} -U`\n\n"
             if _in_notebook():
