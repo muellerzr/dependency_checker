@@ -4,7 +4,12 @@ __all__ = ['get_installed_dependencies', 'is_latest_version', 'get_github_repo_f
            'check_for_newer_release']
 
 # Cell
-import json, ast, pipdeptree, sys, subprocess
+import json, ast, sys, subprocess
+
+from pipdeptree._discovery import get_installed_distributions
+from pipdeptree._models import PackageDAG
+from pipdeptree._render import render_json_tree
+
 from github import Github
 
 import requests
@@ -24,8 +29,8 @@ def get_installed_dependencies(
     include_self:bool=False, # Whether to include the original library in the results
 ) -> dict: # A dictionary of {package:version}
     "Recursively grabs dependencies of python package"
-    pkgs = pipdeptree.get_installed_distributions(local_only=False, user_only=False)
-    tree = pipdeptree.PackageDAG.from_pkgs(pkgs)
+    pkgs = get_installed_distributions(local_only=False, user_only=False)
+    tree = PackageDAG.from_pkgs(pkgs)
     tree = tree.filter([package_name], None)
     curr_depth=0
     def _get_deps(j, dep_dict={}, curr_depth=0):
@@ -41,7 +46,7 @@ def get_installed_dependencies(
                 curr_depth += 1
                 return _get_deps(j['dependencies'], dep_dict, curr_depth)
         return dep_dict
-    deps = _get_deps(ast.literal_eval(pipdeptree.render_json_tree(tree, 4)), {})
+    deps = _get_deps(ast.literal_eval(render_json_tree(tree)), {})
     if not include_self: deps.pop(package_name, None)
     return deps
 
